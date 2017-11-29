@@ -64,7 +64,7 @@ public class SecondActivity extends AppCompatActivity
     private TextView price;
 
     private boolean toast;
-    private boolean notification;
+
     private SharedPreferences sharedPreferences;
     private AlertDialog dialogAlert;
 
@@ -81,7 +81,7 @@ public class SecondActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //We dont need this.
 
@@ -209,6 +209,15 @@ public class SecondActivity extends AppCompatActivity
 */
 
     }
+
+
+    private void showMessage(String mess){
+        toast = sharedPreferences.getBoolean(Home.TOAST,false);
+        if (toast){
+            Toast.makeText(this,mess,Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     /*  private void fullImage(View view){
           final Dialog dialog = new Dialog(SecondActivity.this);

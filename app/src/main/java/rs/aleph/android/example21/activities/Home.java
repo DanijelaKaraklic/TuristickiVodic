@@ -63,9 +63,12 @@ public class Home extends AppCompatActivity
     DrawerLayout.DrawerListener listener;
 
     private boolean toast;
-    private boolean notification;
+
 
     private DatabaseHelper databaseHelper;
+    private SharedPreferences sharedPreferences;
+    public static final String TOAST = "pref_toast";
+
 
    /* private SharedPreferences sharedPreferences;
 
@@ -84,7 +87,7 @@ public class Home extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 
         final ListView listView = (ListView)findViewById(R.id.atrakcije);
@@ -138,6 +141,13 @@ public class Home extends AppCompatActivity
 
 
 
+    }
+
+    private void showMessage(String mess){
+        toast = sharedPreferences.getBoolean(TOAST,false);
+        if (toast){
+            Toast.makeText(this,mess,Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -237,6 +247,7 @@ public class Home extends AppCompatActivity
 
                     try {
                         getDatabaseHelper().getRealEstateDao().create(atrakcija);
+                        showMessage("Added new attraction");
                         refresh();
                     } catch (SQLException e) {
                         e.printStackTrace();
