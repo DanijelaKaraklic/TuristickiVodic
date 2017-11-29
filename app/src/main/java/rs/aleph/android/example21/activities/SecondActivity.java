@@ -581,7 +581,6 @@ public class SecondActivity extends AppCompatActivity
         //here is the main place where we need to work on.
         int id=item.getItemId();
         switch (id){
-/*
             case R.id.nav_home:
                 Intent h= new Intent(SecondActivity.this,Home.class);
                 startActivity(h);
@@ -589,8 +588,7 @@ public class SecondActivity extends AppCompatActivity
             case R.id.nav_settings:
                 Intent i = new Intent(SecondActivity.this,SettingsActivity.class);
                 startActivity(i);
-                break;*/
-
+                break;
             /*if (dialogAlert == null) {
                 dialogAlert = new AboutDialog(SecondActivity.this).prepareDialog();
             } else {

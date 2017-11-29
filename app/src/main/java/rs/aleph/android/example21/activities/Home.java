@@ -261,14 +261,19 @@ public class Home extends AppCompatActivity
         int id=item.getItemId();
         switch (id){
 
-          /*  case R.id.nav_home:
+            case R.id.nav_home:
                 Intent h= new Intent(Home.this,Home.class);
                 startActivity(h);
                 break;
             case R.id.nav_settings:
-                *//*Intent i = new Intent(Home.this,SettingsActivity.class);
-                startActivity(i);*//*
+                Intent i = new Intent(Home.this,SettingsActivity.class);
+                startActivity(i);
+                break;
+           /* case R.id.nav_about:
+                Intent k = new Intent(Home.this,SettingsActivity.class);
+                startActivity(k);
                 break;*/
+
 
         }
 

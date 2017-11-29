@@ -28,6 +28,12 @@
             android:icon="@mipmap/ic_launcher"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name="rs.aleph.android.example21.activities.SettingsActivity"
+            android:label="Settings Activity"
+            android:icon="@mipmap/ic_launcher"
+            android:theme="@style/AppTheme.NoActionBar" />
+
 
 
     </application>
