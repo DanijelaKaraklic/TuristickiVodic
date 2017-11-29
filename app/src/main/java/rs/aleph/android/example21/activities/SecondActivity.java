@@ -105,7 +105,7 @@ public class SecondActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        id = getIntent().getExtras().getLong(Home.ATRAKCIJA);
+        id = getIntent().getExtras().getInt(Home.ATRAKCIJA);
 
 
         try {
