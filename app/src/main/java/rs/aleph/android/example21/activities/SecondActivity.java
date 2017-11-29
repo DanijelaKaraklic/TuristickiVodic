@@ -343,6 +343,61 @@ public class SecondActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (id){
             case R.id.action_edit:
+                final Dialog dialog = new Dialog(SecondActivity.this);
+
+                dialog.setContentView(R.layout.dialog_layout);
+
+                dialog.setTitle("Update an attraction");
+
+                Button ok = (Button) dialog.findViewById(R.id.ok);
+                ok.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+
+
+                                              final EditText editName = (EditText) dialog.findViewById(R.id.re_name);
+                                              final EditText editDescription = (EditText) dialog.findViewById(R.id.re_description);
+                                              //final EditText editImage = (EditText) dialog.findViewById(R.id.re_image);
+                                              final EditText editAdress = (EditText) dialog.findViewById(R.id.re_adress);
+                                              final EditText editWeb = (EditText) dialog.findViewById(R.id.re_web);
+                                              final EditText editTel = (EditText) dialog.findViewById(R.id.re_telephone);
+                                              final EditText editTimes = (EditText) dialog.findViewById(R.id.re_times);
+                                              final EditText editTimee = (EditText) dialog.findViewById(R.id.re_timee);
+                                              final EditText editPrice = (EditText) dialog.findViewById(R.id.re_price);
+                                              final EditText editComm = (EditText) dialog.findViewById(R.id.re_comme);
+
+
+                                              atrakcija.setmName(editName.getText().toString());
+                                              atrakcija.setmDescription(editDescription.getText().toString());
+                                              //realEstate.setmImage(editImage.getText().toString());
+                                              atrakcija.setmAdress(editAdress.getText().toString());
+                                              atrakcija.setmTel(Integer.parseInt(editTel.getText().toString()));
+                                              atrakcija.setmWebAdress(editWeb.getText().toString());
+
+                                              atrakcija.setmStart(Integer.parseInt(editTimes.getText().toString()));
+                                              atrakcija.setmEnd(Integer.parseInt(editTimee.getText().toString()));
+
+                                              atrakcija.setmPrice(Double.parseDouble(editPrice.getText().toString()));
+
+                                              atrakcija.setmComment(editComm.getText().toString());
+
+                                              try {
+                                                  getDatabaseHelper().getRealEstateDao().update(atrakcija);
+                                                  showMessage("Update attraction");
+
+                                              } catch (SQLException e) {
+                                                  e.printStackTrace();
+                                              }
+                                          }
+
+                                      });
+                break;
+            case R.id.action_delete:
+                break;
+
+
+
+
               /*  final Dialog dialog = new Dialog(SecondActivity.this);
 
                 dialog.setContentView(R.layout.dialog_layout);
