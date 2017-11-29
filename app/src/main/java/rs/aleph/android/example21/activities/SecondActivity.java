@@ -36,6 +36,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 import java.sql.SQLException;
 
+import rs.aleph.android.example21.AboutDialogs.AboutDialog;
 import rs.aleph.android.example21.R;
 import rs.aleph.android.example21.db.DatabaseHelper;
 
@@ -589,15 +590,30 @@ public class SecondActivity extends AppCompatActivity
                 Intent i = new Intent(SecondActivity.this,SettingsActivity.class);
                 startActivity(i);
                 break;
+            case R.id.nav_about:
+                if (dialogAlert == null) {
+                    dialogAlert = new AboutDialog(SecondActivity.this).prepareDialog();
+
+                } else {
+                    if (dialogAlert.isShowing()) {
+                        dialogAlert.dismiss();
+                    }
+
+                }
+                dialogAlert.show();
+
+
+               //
+
             /*if (dialogAlert == null) {
-                dialogAlert = new AboutDialog(SecondActivity.this).prepareDialog();
+
             } else {
                 if (dialogAlert.isShowing()) {
                     dialogAlert.dismiss();
                 }
 
             }
-            dialogAlert.show();*/
+            */
 
 
         }

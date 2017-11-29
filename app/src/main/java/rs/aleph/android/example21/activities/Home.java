@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import java.sql.SQLException;
 import java.util.List;
 
+import rs.aleph.android.example21.AboutDialogs.AboutDialog;
 import rs.aleph.android.example21.R;
 import rs.aleph.android.example21.db.DatabaseHelper;
 
@@ -46,6 +48,8 @@ import rs.aleph.android.example21.db.DatabaseHelper;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AlertDialog dialogAlert;
 
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -269,10 +273,18 @@ public class Home extends AppCompatActivity
                 Intent i = new Intent(Home.this,SettingsActivity.class);
                 startActivity(i);
                 break;
-           /* case R.id.nav_about:
-                Intent k = new Intent(Home.this,SettingsActivity.class);
-                startActivity(k);
-                break;*/
+            case R.id.nav_about:
+                if (dialogAlert == null) {
+                    dialogAlert = new AboutDialog(Home.this).prepareDialog();
+
+                } else {
+                    if (dialogAlert.isShowing()) {
+                        dialogAlert.dismiss();
+                    }
+
+                }
+                dialogAlert.show();
+
 
 
         }
