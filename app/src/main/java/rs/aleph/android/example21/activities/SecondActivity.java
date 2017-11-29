@@ -39,6 +39,7 @@ import java.sql.SQLException;
 import rs.aleph.android.example21.AboutDialogs.AboutDialog;
 import rs.aleph.android.example21.R;
 import rs.aleph.android.example21.db.DatabaseHelper;
+import rs.aleph.android.example21.db.model.TuristickaAtrakcija;
 
 /**
  * Created by androiddevelopment on 29.11.17..
@@ -53,15 +54,25 @@ public class SecondActivity extends AppCompatActivity
     private NavigationView navigationView;
     private Toolbar toolbar = null;
 
+
+
+
+
+
     private TextView name;
     private TextView description;
-    private Button btnImage;
-    private ImageView ivImage;
+    private TextView web;
+
     private TextView adress;
     private TextView tel;
-    private TextView quad;
-    private TextView room;
+    private TextView time1;
+    private TextView time2;
     private TextView price;
+    private TextView comme;
+
+
+
+    private TuristickaAtrakcija atrakcija;
 
     private boolean toast;
 
@@ -83,132 +94,81 @@ public class SecondActivity extends AppCompatActivity
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        //We dont need this.
-
-
-      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar,R.string.nav_draw_open,R.string.nav_close);
+                this, drawer, toolbar, R.string.nav_draw_open, R.string.nav_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //prikaz u second activity svih podataka
-        /*id = getIntent().getExtras().getLong(Home.REAL_ESTATE);
-        try {
 
-            realEstate = getDatabaseHelper().getRealEstateDao().queryForId((int) id);
+        id = getIntent().getExtras().getLong(Home.ATRAKCIJA);
+
+
+        try {
+            atrakcija = getDatabaseHelper().getRealEstateDao().queryForId((int) id);
+
+
 
             name = (TextView) findViewById(R.id.re_name);
             description = (TextView) findViewById(R.id.re_description);
             //ivImage = (ImageView) findViewById(R.id.re_image);
             adress = (TextView) findViewById(R.id.re_adress);
+            web = (TextView) findViewById(R.id.re_web);
             tel = (TextView) findViewById(R.id.re_telephone);
-            quad = (TextView) findViewById(R.id.re_quad);
-            room = (TextView) findViewById(R.id.re_room);
+            time1 = (TextView) findViewById(R.id.re_times);
+            time2 = (TextView) findViewById(R.id.re_timee);
             price = (TextView) findViewById(R.id.re_price);
+            comme = (TextView) findViewById(R.id.re_comme);
 
-            name.setText(realEstate.getmName());
-            description.setText(realEstate.getmDescription());
-            adress.setText(realEstate.getmAdress());
-            tel.setText(String.valueOf(realEstate.getmTel()));
+            name.setText(atrakcija.getmName());
+            description.setText(atrakcija.getmDescription());
+            web.setText(atrakcija.getmAdress());
+            adress.setText(atrakcija.getmAdress());
+            tel.setText(String.valueOf(atrakcija.getmTel()));
             tel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent call = new Intent(Intent.ACTION_CALL);
-                    call.setData(Uri.parse("tel:" + String.valueOf(realEstate.getmTel())));
+                    call.setData(Uri.parse("tel:" + String.valueOf(atrakcija.getmTel())));
 
-                    if (isStoragePermissionGranted()){
+                    if (isStoragePermissionGranted()) {
                         startActivity(call);
                     }
 
                 }
             });
 
-
-            double q = realEstate.getmQuadrature();
-            quad.setText(String.valueOf(q));
-            room.setText(String.valueOf(realEstate.getmRoom()));
-            price.setText(String.valueOf(realEstate.getmPrice()));
-
-
-
-            Button button = (Button)findViewById(R.id.btn_schedule);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toast = sharedPreferences.getBoolean(Home.TOAST,false);
-                    notification = sharedPreferences.getBoolean(Home.NOTIFICATION,false);
-
-                    if (notification){
-                        //showNotification(getString(R.string.notif_schedule),getString(R.string.notif_schedule_title));
-                    }
-                }
-            });
-
-
-            // Finds "ivImage" ImageView and sets "imageDrawable" property
-            *//*ImageView ivImage = (ImageView) findViewById(R.id.iv_image);
-            InputStream is = null;
-            try {
-                is = getActivity().getAssets().open(FruitProvider.getFruitById(position).getImage());
-                Drawable drawable = Drawable.createFromStream(is, null);
-                ivImage.setImageDrawable(drawable);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Finds "tvName" TextView and sets "text" property
-            TextView tvName = (TextView) findViewById(R.id.tv_name);
-            tvName.setText(FruitProvider.getFruitById(position).getName());
-
-            // Finds "tvDescription" TextView and sets "text" property
-            TextView tvDescription = (TextView) findViewById(R.id.tv_description);
-            tvDescription.setText(FruitProvider.getFruitById(position).getDescription());
-
-            // Finds "spCategory" Spiner and sets "selection" property
-            Spinner category = (Spinner) findViewById(R.id.sp_category);
-            List<String> categories = CategoryProvider.getCategoryNames();
-            ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, categories);
-            category.setAdapter(adapter);
-            category.setSelection((int)FruitProvider.getFruitById(position).getCategory().getId());
-
-            // Finds "rbRating" RatingBar and sets "rating" property
-            RatingBar rbRating = (RatingBar) findViewById(R.id.rb_rating);
-            rbRating.setRating(FruitProvider.getFruitById(position).getRating());
-
-            // Finds "btnBuy" Button and sets "onClickListener" listener
-            FloatingActionButton btnBuy = (FloatingActionButton) findViewById(R.id.btn_buy);
-            btnBuy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showNotification();
-                }
-            });*//*
-
+            time1.setText(String.valueOf(atrakcija.getmStart()));
+            time2.setText(String.valueOf(atrakcija.getmEnd()));
+            price.setText(String.valueOf(atrakcija.getmPrice()));
 
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } *//*catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-*/
+
+
+
+
+
+
+
 
     }
+
+
+
+
+
+
+
+
+
+
 
 
     private void showMessage(String mess){
@@ -218,6 +178,39 @@ public class SecondActivity extends AppCompatActivity
         }
     }
 
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(Manifest.permission.CALL_PHONE)
+                            == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CALL_PHONE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+                grantResults[2]== PackageManager.PERMISSION_GRANTED){
+            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+        }
+    }
 
     /*  private void fullImage(View view){
           final Dialog dialog = new Dialog(SecondActivity.this);
@@ -238,32 +231,9 @@ public class SecondActivity extends AppCompatActivity
 
       }
   */
-   /* private void showNotification(String title,String message){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_action_real_estates);
-        builder.setSmallIcon(R.drawable.ic_action_real_estates);
-        builder.setContentTitle(title);
-        builder.setContentText(message);
-        builder.setLargeIcon(bitmap);
 
-        // Shows notification with the notification manager (notification ID is used to update the notification later on)
-        //umesto this aktivnost
-        NotificationManager manager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(1, builder.build());
-    }*/
 
-   /* private void showMessage(String message,String title){
-        toast = sharedPreferences.getBoolean(Home.TOAST,false);
-        notification = sharedPreferences.getBoolean(Home.NOTIFICATION,false);
-        if (toast){
-            Toast.makeText(this, message,Toast.LENGTH_SHORT).show();
-        }
-        if (notification){
-            showNotification(message,title);
-        }
 
-    }
-*/
     /*private void refresh()  {
         // realEstate = getDatabaseHelper().getRealEstateDao().queryForId((int)id);
         name = (TextView) findViewById(R.id.re_name);
@@ -298,57 +268,9 @@ public class SecondActivity extends AppCompatActivity
     }*/
 
 
-    /**
-     * Od verzije Marshmallow Android uvodi pojam dinamickih permisija
-     * Sto korisnicima olaksva rad, a programerima uvodi dodadan posao.
-     * Cela ideja ja u tome, da se permisije ili prava da aplikcija
-     * nesto uradi, ne zahtevaju prilikom instalacije, nego prilikom
-     * prve upotrebe te funkcionalnosti. To za posledicu ima da mi
-     * svaki put moramo da proverimo da li je odredjeno pravo dopustneo
-     * ili ne. Iako nije da ponovo trazimo da korisnik dopusti, u protivnom
-     * tu funkcionalnost necemo obaviti uopste.
-     * */
-    /*public  boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED &&
-                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_GRANTED &&
-                    checkSelfPermission(Manifest.permission.CALL_PHONE)
-                            == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG,"Permission is granted");
-                return true;
-            } else {
 
-                Log.v(TAG,"Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CALL_PHONE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG,"Permission is granted");
-            return true;
-        }
-    }
-*/
-    /**
-     *
-     * Ako odredjena funkcija nije dopustena, saljemo zahtev android
-     * sistemu da zahteva odredjene permisije. Korisniku seprikazuje
-     * diloag u kom on zeli ili ne da dopusti odedjene permisije.
-     */
-/*
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults[0]== PackageManager.PERMISSION_GRANTED
-                && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
-                grantResults[2]== PackageManager.PERMISSION_GRANTED){
-            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
-        }
-    }
-*/
+
+
 
     @Override
     public void onBackPressed() {
@@ -420,7 +342,7 @@ public class SecondActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id){
-            //case R.id.action_edit:
+            case R.id.action_edit:
               /*  final Dialog dialog = new Dialog(SecondActivity.this);
 
                 dialog.setContentView(R.layout.dialog_layout);
