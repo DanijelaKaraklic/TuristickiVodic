@@ -195,41 +195,48 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-   /*     if (id == R.id.action_settings) {
-            Intent intent = new Intent(Home.this,SettingsActivity.class);
-            startActivity(intent);
-        }else if (id == R.id.action_add){
+        if (id == R.id.action_add){
             final Dialog dialog = new Dialog(Home.this);
 
             dialog.setContentView(R.layout.dialog_layout);
 
-            dialog.setTitle("Insert an actor");
+            dialog.setTitle("Insert an attraction");
 
             Button ok = (Button) dialog.findViewById(R.id.ok);
             ok.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
 
+
                     final EditText editName = (EditText) dialog.findViewById(R.id.re_name);
                     final EditText editDescription = (EditText) dialog.findViewById(R.id.re_description);
-                    final EditText editImage = (EditText) dialog.findViewById(R.id.re_image);
+                    //final EditText editImage = (EditText) dialog.findViewById(R.id.re_image);
                     final EditText editAdress = (EditText) dialog.findViewById(R.id.re_adress);
+                    final EditText editWeb = (EditText) dialog.findViewById(R.id.re_web);
                     final EditText editTel = (EditText) dialog.findViewById(R.id.re_telephone);
-                    final EditText editQuad = (EditText) dialog.findViewById(R.id.re_quad);
-                    final EditText editRoom = (EditText) dialog.findViewById(R.id.re_room);
+                    final EditText editTimes = (EditText) dialog.findViewById(R.id.re_times);
+                    final EditText editTimee = (EditText) dialog.findViewById(R.id.re_timee);
                     final EditText editPrice = (EditText) dialog.findViewById(R.id.re_price);
-                    RealEstate realEstate = new RealEstate();
-                    realEstate.setmName(editName.getText().toString());
-                    realEstate.setmDescription(editDescription.getText().toString());
-                    realEstate.setmImage(editImage.getText().toString());
-                    realEstate.setmAdress(editAdress.getText().toString());
-                    realEstate.setmTel(Integer.parseInt(editTel.getText().toString()));
-                    realEstate.setmQuadrature(Double.parseDouble(editQuad.getText().toString()));
-                    realEstate.setmRoom(Integer.parseInt(editRoom.getText().toString()));
-                    realEstate.setmPrice(Double.parseDouble(editPrice.getText().toString()));
+                    final EditText editComm = (EditText) dialog.findViewById(R.id.re_comme);
+
+                    TuristickaAtrakcija atrakcija = new TuristickaAtrakcija();
+
+                    atrakcija.setmName(editName.getText().toString());
+                    atrakcija.setmDescription(editDescription.getText().toString());
+                    //realEstate.setmImage(editImage.getText().toString());
+                    atrakcija.setmAdress(editAdress.getText().toString());
+                    atrakcija.setmTel(Integer.parseInt(editTel.getText().toString()));
+                    atrakcija.setmWebAdress(editWeb.getText().toString());
+
+                    atrakcija.setmStart(Integer.parseInt(editTimes.getText().toString()));
+                    atrakcija.setmEnd(Integer.parseInt(editTimee.getText().toString()));
+
+                    atrakcija.setmPrice(Double.parseDouble(editPrice.getText().toString()));
+
+                    atrakcija.setmComment(editComm.getText().toString());
 
                     try {
-                        getDatabaseHelper().getRealEstateDao().create(realEstate);
+                        getDatabaseHelper().getRealEstateDao().create(atrakcija);
                         refresh();
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -253,7 +260,6 @@ public class Home extends AppCompatActivity
 
             dialog.show();
         }
-*/
         return super.onOptionsItemSelected(item);
     }
 
