@@ -11,7 +11,7 @@
 
 
    <ListView
-       android:id="@+id/real_estates"
+       android:id="@+id/atrakcije"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"/>
 

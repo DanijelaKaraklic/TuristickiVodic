@@ -41,6 +41,7 @@ import java.util.List;
 import rs.aleph.android.example21.AboutDialogs.AboutDialog;
 import rs.aleph.android.example21.R;
 import rs.aleph.android.example21.db.DatabaseHelper;
+import rs.aleph.android.example21.db.model.TuristickaAtrakcija;
 
 /**
  * Created by androiddevelopment on 29.11.17..
@@ -48,6 +49,8 @@ import rs.aleph.android.example21.db.DatabaseHelper;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String ATRAKCIJA = "selectedItemId";
 
     private AlertDialog dialogAlert;
 
@@ -83,23 +86,22 @@ public class Home extends AppCompatActivity
 
         //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-/*
 
-        final ListView listView = (ListView)findViewById(R.id.real_estates);
+        final ListView listView = (ListView)findViewById(R.id.atrakcije);
 
         try {
 
 
-            List<RealEstate> listRs = getDatabaseHelper().getRealEstateDao().queryForAll();
-            ListAdapter adapter1 = new ArrayAdapter<RealEstate>(Home.this,R.layout.list_item,listRs);
+            List<TuristickaAtrakcija> listRs = getDatabaseHelper().getRealEstateDao().queryForAll();
+            ListAdapter adapter1 = new ArrayAdapter<TuristickaAtrakcija>(Home.this,R.layout.list_item,listRs);
             listView.setAdapter(adapter1);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(Home.this,SecondActivity.class);
-                    RealEstate r = (RealEstate)listView.getItemAtPosition(position);
-                    long selectedItemId = r.getmId();
-                    intent.putExtra(REAL_ESTATE,selectedItemId);
+                    TuristickaAtrakcija r = (TuristickaAtrakcija) listView.getItemAtPosition(position);
+                    int selectedItemId = r.getmId();
+                    intent.putExtra(ATRAKCIJA,selectedItemId);
                     startActivity(intent);
                 }
             });
@@ -109,7 +111,6 @@ public class Home extends AppCompatActivity
         } catch (SQLException e) {
             e.printStackTrace();
         }
-*/
 
 
       /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -140,17 +141,17 @@ public class Home extends AppCompatActivity
     }
 
 
-    /*private void refresh(){
-        ListView listview = (ListView) findViewById(R.id.real_estates);
+    private void refresh(){
+        ListView listview = (ListView) findViewById(R.id.atrakcije);
 
         if (listview != null){
-            ArrayAdapter<RealEstate> adapter = (ArrayAdapter<RealEstate>) listview.getAdapter();
+            ArrayAdapter<TuristickaAtrakcija> adapter = (ArrayAdapter<TuristickaAtrakcija>) listview.getAdapter();
 
             if(adapter!= null)
             {
                 try {
                     adapter.clear();
-                    List<RealEstate> list = getDatabaseHelper().getRealEstateDao().queryForAll();
+                    List<TuristickaAtrakcija> list = getDatabaseHelper().getRealEstateDao().queryForAll();
 
                     adapter.addAll(list);
 
@@ -161,12 +162,11 @@ public class Home extends AppCompatActivity
             }
         }
     }
-*/
-   /* @Override
+    @Override
     protected void onResume() {
         super.onResume();
         refresh();
-    }*/
+    }
 
 
 
