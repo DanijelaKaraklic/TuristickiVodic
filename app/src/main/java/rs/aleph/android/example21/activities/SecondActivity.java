@@ -388,11 +388,63 @@ public class SecondActivity extends AppCompatActivity
                                               } catch (SQLException e) {
                                                   e.printStackTrace();
                                               }
+
+                                              dialog.dismiss();
                                           }
 
+
+
                                       });
+
+                Button cancel = (Button) dialog.findViewById(R.id.cancel);
+                cancel.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+                dialog.show();
+
+
                 break;
             case R.id.action_delete:
+
+                 final Dialog deleteDia = new Dialog(SecondActivity.this);
+                deleteDia.setContentView(R.layout.dialog_delete);
+
+                deleteDia.setTitle("Delete an attracyion");
+
+                Button ok1 =(Button)deleteDia.findViewById(R.id.ok);
+                ok1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            getDatabaseHelper().getRealEstateDao().delete(atrakcija);
+                            //showMessage(getString(R.string.sec_mess_delete),getString(R.string.sec_mess_del_title));
+                            deleteDia.dismiss();
+                            finish();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
+                Button cancel1 = (Button)deleteDia.findViewById(R.id.cancel);
+                cancel1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteDia.dismiss();
+                    }
+                });
+
+
+                deleteDia.show();
+
+
+
                 break;
 
 
