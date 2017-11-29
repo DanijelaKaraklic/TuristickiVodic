@@ -6,7 +6,7 @@
     <!--Ovde ubacujemo elemente iz navigation list-->
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_action_product"
+
         android:title="Home" />
     <item
         android:id="@+id/nav_settings"
